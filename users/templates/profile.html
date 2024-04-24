@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}프로필{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>프로필 정보</h1>
+    <p><strong>사용자 이름:</strong> {{ profile_user.username }}</p>
+    <p><strong>이메일:</strong> {{ profile_user.email }}</p>
+    <p><strong>회원가입 날짜:</strong> {{ profile_user.date_joined|date:"Y년 m월 d일" }}</p>
+    <p>찜한 물건 수: <a href="{% url 'users:liked_items_list' username=profile_user.username %}">{{ profile_user.liked_items.count }}</a></p>
+    <p>팔로워 수: <a href="{% url 'users:followers_list' username=profile_user.username %}">{{ profile_user.followers.count }}</a></p>
+    <p>팔로우 수: <a href="{% url 'users:following_list' username=profile_user.username %}">{{ profile_user.following.count }}</a></p>
+    
+    {% if request.user != profile_user and request.user.is_authenticated %}
+        {% if is_following %}
+            <form action="{% url 'users:follow' username=profile_user.username %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning">언팔로우</button>
+            </form>
+        {% else %}
+            <form action="{% url 'users:follow' username=profile_user.username %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">팔로우</button>
+            </form>
+        {% endif %}
+    {% endif %}
+    
+    <h2>{{ profile_user.username }}가 판매 중인 물건들</h2>
+    <div class="row">
+        {% for item in items_for_sale %}
+            {% include "item_card.html" with item=item %}
+        {% empty %}
+            <p>판매 중인 물건이 없습니다.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

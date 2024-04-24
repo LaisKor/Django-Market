@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ item.name }}을(를) 정말로 삭제하시겠습니까?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">삭제</button>
+        <a href="{% url 'items:item_list' %}" class="btn btn-secondary">취소</a>
+    </form>
+</div>
+{% endblock %}

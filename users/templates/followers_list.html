@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}팔로워 목록{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>팔로워 목록</h2>
+    <div class="list-group">
+        {% for follower in followers %}
+            <a href="{% url 'users:profile' username=follower.username %}" class="list-group-item list-group-item-action">{{ follower.username }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

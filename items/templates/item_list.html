@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>물건 목록</h1>
+    <ul>
+        {% for item in items %}
+        <li>
+            <a href="{% url 'items:item_detail' item.id %}">
+                <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                <h3>{{ item.name }}</h3>
+                <p>가격: {{ item.price }}</p>
+                <p>{{ item.description }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

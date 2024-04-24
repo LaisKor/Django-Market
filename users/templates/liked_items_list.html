@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>찜한 물건 목록</h2>
+    <div class="row">
+        {% for item in items %}
+            {% include "item_card.html" %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
