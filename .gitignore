@@ -378,6 +378,7 @@ $RECYCLE.BIN/
 
 media/static/images/*
 !media/static/images/.gitkeep
+staticfiles/
 
 
 # End of https://www.toptal.com/developers/gitignore/api/python,venv,visualstudiocode,pycharm,macos,windows
